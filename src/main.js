@@ -2,14 +2,26 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import router from './vue/router'
+import store from './vue/store/index'
+import './vue/mixins'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import './vue/resource/index'
+import './vue/components'
+import i18n from './vue/i18n/index'
+import './vue/filters'
+
+Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: router,
+  i18n: i18n,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store: store
 })
