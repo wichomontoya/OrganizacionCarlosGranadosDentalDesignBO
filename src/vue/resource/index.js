@@ -1,0 +1,13 @@
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
+
+Vue.http.options.root = 'http://192.168.0.30:8080/api/'
+
+Vue.http.interceptor.before = (request, next) => {
+  console.log(request)
+  next((response) => {
+    console.log(response)
+  })
+}
