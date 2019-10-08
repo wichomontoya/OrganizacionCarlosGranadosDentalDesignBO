@@ -58,8 +58,8 @@
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">
-          <v-layout justify-center align-center>
-            <v-flex shrink>
+          <v-layout justify-center>
+            <v-flex sm10 shrink style="padding: 50px;">
               <router-view/>
             </v-flex>
           </v-layout>
@@ -80,7 +80,7 @@ export default {
         { divider: true },
         { icon: 'bar_chart', text: 'Graficas', route: 'graphics' },
         { divider: true },
-        { icon: 'account_circle', text: 'Clientes', reoute: 'clients' },
+        { icon: 'account_circle', text: 'Clientes', route: 'clients' },
         { icon: 'whatshot', text: 'Pozos', route: 'pits' },
         { icon: 'format_list_numbered', text: 'Propiedades', route: 'properties' },
         { divider: true }
@@ -98,7 +98,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 </style>

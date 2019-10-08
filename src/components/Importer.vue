@@ -91,87 +91,79 @@ export default {
       });
       var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
       var data_excel = XLSX.utils.sheet_to_json(first_worksheet, {header:1});
-      // console.log("data_excel");
-      // console.log(data_excel);
       data_excel.shift()
       this.usersJson = data_excel
-      // console.log(this.usersJson);
-      /* convert from array of arrays to workbook */
-      // var worksheet = XLSX.utils.aoa_to_sheet(data_excel);
-      // var new_workbook = XLSX.utils.book_new();
-      // XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
     },
     saveDocument(){
-      var vm = this
-      vm.usersJson.map(function(property){
-        var object = {
-          section: property[0],
-          report_number: property[1],
-          md_ft: property[2],
-          tvd_ft: property[3],
-          fl_temp_f: property[4],
-          density_ppg: property[5],
-          funn_visc_seq__qt: property[6],
-          pv_cp: property[7],
-          yp: property[8],
-          prop_10_s: property[9],
-          prop_10_m: property[10],
-          prop_30_m: property[11],
-          api_ml__30_min: property[12],
-          hthp_ml__30_min: property[13],
-          cake_api: property[14],
-          cake_hthp: property[15],
-          temp_f: property[16],
-          ph: property[17],
-          pm_ml: property[18],
-          pf_ml: property[19],
-          mf_ml: property[20],
-          cl_mg__l: property[21],
-          total_hardness_mg__l: property[22],
-          mbt_ppb_eq: property[23],
-          sand_porcent_by_vol: property[24],
-          corr_solid: property[25],
-          lgs: property[26],
-          nap_base: property[27],
-          water: property[28],
-          prop_600: property[29],
-          prop_300: property[30],
-          prop_200: property[31],
-          prop_100: property[32],
-          prop_6: property[33],
-          prop_3: property[34],
-          n_hb: property[35],
-          k_hb_ibfs_potency_n__100ft2: property[36],
-          tau_0_lbs__100ft2: property[37],
-          excess_total_limd_ibm__bbl: property[38],
-        }
-        vm.segments.push(object)
-      })
-      console.log(vm.segments);
-      try {
-        this.$http.post('pits/save_document',
-        {
-          data: {
-            attributes:{
-              name: this.name,
-              client_id: 2,
-            },
-            properties_attributes: this.segments
+      if(this.valid){
+        var vm = this
+        vm.usersJson.map(function(property){
+          var object = {
+            section: property[0],
+            report_number: property[1],
+            md_ft: property[2],
+            tvd_ft: property[3],
+            fl_temp_f: property[4],
+            density_ppg: property[5],
+            funn_visc_seq__qt: property[6],
+            pv_cp: property[7],
+            yp: property[8],
+            prop_10_s: property[9],
+            prop_10_m: property[10],
+            prop_30_m: property[11],
+            api_ml__30_min: property[12],
+            hthp_ml__30_min: property[13],
+            cake_api: property[14],
+            cake_hthp: property[15],
+            temp_f: property[16],
+            ph: property[17],
+            pm_ml: property[18],
+            pf_ml: property[19],
+            mf_ml: property[20],
+            cl_mg__l: property[21],
+            total_hardness_mg__l: property[22],
+            mbt_ppb_eq: property[23],
+            sand_porcent_by_vol: property[24],
+            corr_solid: property[25],
+            lgs: property[26],
+            nap_base: property[27],
+            water: property[28],
+            prop_600: property[29],
+            prop_300: property[30],
+            prop_200: property[31],
+            prop_100: property[32],
+            prop_6: property[33],
+            prop_3: property[34],
+            n_hb: property[35],
+            k_hb_ibfs_potency_n__100ft2: property[36],
+            tau_0_lbs__100ft2: property[37],
+            excess_total_limd_ibm__bbl: property[38],
           }
-        }).then(function(response){
-          console.log("Congrats");
-          console.log(response);
-        },function(response){
-          console.log("Error");
-          console.log(response);
+          vm.segments.push(object)
         })
-      } catch (e) {
-
+        try {
+          this.$http.post('pits/save_document',
+          {
+            data: {
+              attributes:{
+                name: this.name,
+                client_id: 2,
+              },
+              properties_attributes: this.segments
+            }
+          }).then(function(response){
+            console.log("Congrats");
+            console.log(response);
+          },function(response){
+            console.log("Error");
+            console.log(response);
+          })
+        } catch (e) {
+          console.log("Error");
+          console.log(e);
+        }
       }
     }
   }
 }
 </script>
-
-<style lang="css">
-</style>
