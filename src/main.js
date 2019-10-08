@@ -11,6 +11,7 @@ import './vue/resource/index'
 import './vue/components'
 import i18n from './vue/i18n/index'
 import './vue/filters'
+import XLSX from 'xlsx';
 
 Vue.use(Vuetify)
 
