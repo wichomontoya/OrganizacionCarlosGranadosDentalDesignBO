@@ -59,7 +59,7 @@
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">
           <v-layout justify-center>
-            <v-flex sm10 shrink style="padding: 50px;">
+            <v-flex sm11 shrink style="padding: 50px 0;">
               <router-view/>
             </v-flex>
           </v-layout>

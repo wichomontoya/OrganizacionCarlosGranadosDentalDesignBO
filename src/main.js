@@ -12,8 +12,16 @@ import './vue/components'
 import i18n from './vue/i18n/index'
 import './vue/filters'
 import XLSX from 'xlsx';
+import VueHighcharts from 'vue-highcharts';
+import VueApexCharts from 'vue-apexcharts'
+
+
 
 Vue.use(Vuetify)
+Vue.use(VueApexCharts)
+Vue.use(VueHighcharts);
+
+Vue.component('apexchart', VueApexCharts)
 
 Vue.config.productionTip = false
 
