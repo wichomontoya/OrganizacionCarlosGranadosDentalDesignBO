@@ -14,14 +14,17 @@ import './vue/filters'
 import XLSX from 'xlsx';
 import VueHighcharts from 'vue-highcharts';
 import VueApexCharts from 'vue-apexcharts'
+import VuePlotly from '@statnett/vue-plotly'
 
 
 
 Vue.use(Vuetify)
 Vue.use(VueApexCharts)
 Vue.use(VueHighcharts);
+Vue.use(VuePlotly);
 
 Vue.component('apexchart', VueApexCharts)
+Vue.component('vue-plotly', VuePlotly)
 
 Vue.config.productionTip = false
 

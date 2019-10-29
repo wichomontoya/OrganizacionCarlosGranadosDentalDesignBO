@@ -2,31 +2,57 @@
   <article class="importer">
     <section>
       <h1>Importador de propiedades</h1>
-      <v-form v-model="valid">
-        <v-text-field
-          v-model="name"
-          :rules="nameRules"
-          label="Nombre del pozo"
-          required
-        ></v-text-field>
-        <span class="data_card__info--label">Adjuntar información (Formato Excel)</span>
-        <div class="trainers__form--photo_container" style="width:max-content">
-          <label
-            for="excel_input"
-            style="
-            width: 160px;
-            height: 39px;"
-            class="trainers__form--photo_button">Examinar</label>
-          <input
-            id="excel_input"
-            type="file"
-            @change="excelUpload()"
-            name="logo"
-            multiple>
-            <p class="accessIndex__text--small" style="margin-left:10%" v-if="excelTitle.length<=0" >Debe adjuntar un archivo con formato Excel</p>
+      <v-flex xs12>
+        <v-select
+            :items="clients"
+            v-model="client_selected"
+            label="Selecciona el cliente"
+            item-text="attributes.name"
+            item-value="id"
+          ></v-select>
+      </v-flex>
+      <div v-if="client_selected">
+        <v-form v-model="valid">
+          <v-text-field
+            v-model="name"
+            :rules="nameRules"
+            label="Nombre del pozo"
+            required
+          ></v-text-field>
+          <span class="data_card__info--label">Adjuntar información (Formato Excel)</span>
+          <div class="trainers__form--photo_container" style="width:max-content">
+            <v-flex xs12>
+              <div v-if="excelTitle.length!=0">
+                <p class="data_card__info--label">Nombre del archivo </p>
+                <p style="font-size: 10px;" ><img style="width:26px" src="https://karrottsportlife.s3-us-west-2.amazonaws.com/excel.png"/>{{excelTitle}}</p>
+              </div>
+              <label
+                for="excel_input"
+                style="
+                height: 39px;"
+                class="trainers__form--photo_button btn">
+                <p class="btn__content">Seleccionar archivo</p></label>
+              <input
+                id="excel_input"
+                type="file"
+                @change="excelUpload()"
+                style="visibility:hidden;"
+                name="logo"
+                multiple>
+              <!-- <p class="accessIndex__text--small" style="margin-left:10%" v-if="excelTitle.length<=0">Debe adjuntar un archivo con formato Excel</p> -->
+            </v-flex>
+          </div>
+        </v-form>
+        <div
+          class=""
+          style="text-align: right; margin-top: 50px;"
+          v-if="valid">
+          <v-btn
+            @click="saveDocument()"
+            color="teal darken-1"
+            style="color: white">Guardar</v-btn>
         </div>
-      </v-form>
-      <v-btn @click="saveDocument()">Guardar</v-btn>
+      </div>
     </section>
   </article>
 </template>
@@ -35,6 +61,8 @@
 export default {
   data(){
     return{
+      clients:[],
+      client_selected: null,
       valid: false,
       name: '',
       usersJson:{},
@@ -45,11 +73,33 @@ export default {
       ],
     }
   },
+  watch:{
+    client_selected(){
+      console.log(this.client_selected);
+    }
+  },
   mounted(){
     var XLSX = require('xlsx');
     console.log(XLSX);
+    this.findClients()
   },
   methods:{
+    findClients(){
+      try {
+        this.$http.get('clients/',
+        ).then(function(response){
+          this.clients = response.body.data
+          console.log("Congrats");
+          console.log(response);
+        },function(response){
+          console.log("Error");
+          console.log(response);
+        })
+      } catch (e) {
+        console.log("Error");
+        console.log(e);
+      }
+    },
     excelUpload(){
       var fileUpload = document.getElementById("excel_input");
       //Validate whether File is valid Excel file.
@@ -147,13 +197,14 @@ export default {
             data: {
               attributes:{
                 name: this.name,
-                client_id: 2,
+                client_id: this.client_selected,
               },
               properties_attributes: this.segments
             }
           }).then(function(response){
             console.log("Congrats");
             console.log(response);
+            this.$router.push({name: 'pits'})
           },function(response){
             console.log("Error");
             console.log(response);

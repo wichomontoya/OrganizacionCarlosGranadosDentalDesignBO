@@ -10,8 +10,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@statnett/vue-plotly": "^0.3.2",
     "apexcharts": "^3.10.0",
     "highcharts": "^7.2.0",
+    "plotly.js": "^1.50.1",
     "vue": "^2.5.2",
     "vue-apexcharts": "^1.5.0",
     "vue-highcharts": "^0.1.0",

@@ -51,15 +51,15 @@
           </template>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar color="teal darken-1" app absolute clipped-left>
-        <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar color="teal darken-1" app absolute clipped-left style="color: white">
+        <v-toolbar-side-icon @click.native="drawer = !drawer" color="white"></v-toolbar-side-icon>
         <span class="title ml-3 mr-5">IPP Backoffice</span></span>
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">
           <v-layout justify-center>
-            <v-flex sm11 shrink style="padding: 50px 0;">
+            <v-flex sm12 shrink style="padding: 50px 10%; height: calc(100vh - 120px); overflow-x: hidden; overflow-y: auto ">
               <router-view/>
             </v-flex>
           </v-layout>
@@ -82,7 +82,7 @@ export default {
         { divider: true },
         { icon: 'account_circle', text: 'Clientes', route: 'clients' },
         { icon: 'whatshot', text: 'Pozos', route: 'pits' },
-        { icon: 'format_list_numbered', text: 'Propiedades', route: 'properties' },
+        // { icon: 'format_list_numbered', text: 'Propiedades', route: 'properties' },
         { divider: true }
       ]
     }

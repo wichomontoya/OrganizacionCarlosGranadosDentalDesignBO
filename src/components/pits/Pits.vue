@@ -1,6 +1,14 @@
 <template>
   <article class="">
     <h3>Pozos</h3>
+    <v-flex xs12>
+      <v-select
+          :items="clients"
+          v-model="client_selected"
+          label="Selecciona el cliente"
+          item-text="attributes.name"
+        ></v-select>
+    </v-flex>
     <div
       style="margin: 20px 0;"
       v-for="(pit, index) in pits"
@@ -67,6 +75,8 @@
 export default {
   data(){
     return{
+      clients: [],
+      client_selected: null,
       pits: [],
       headers: [
         {text: 'Sección', value: 'section'},
@@ -112,13 +122,40 @@ export default {
 
     }
   },
+  watch:{
+    client_selected(){
+      console.log(this.client_selected);
+      this.findPits(this.client_selected.id)
+    }
+  },
   mounted(){
-    this.findPits()
+    this.findClients()
+    // this.findPits()
   },
   methods:{
-    findPits(){
+    findClients(){
       try {
-        this.$http.get('pits/',
+        this.$http.get('clients/',
+        ).then(function(response){
+          this.clients = response.body.data
+          console.log("Congrats");
+          console.log(response);
+        },function(response){
+          console.log("Error");
+          console.log(response);
+        })
+      } catch (e) {
+        console.log("Error");
+        console.log(e);
+      }
+    },
+    findPits(id){
+      try {
+        this.$http.get('find_by_client',{
+          params: {
+            client_id: id
+          }
+        }
         ).then(function(response){
           this.pits = response.body.data
           console.log("Congrats");

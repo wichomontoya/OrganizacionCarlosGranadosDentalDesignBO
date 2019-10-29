@@ -2,6 +2,7 @@ import Hello from './../../components/HelloWorld.vue'
 import Importer from './../../components/Importer.vue'
 import Graphics from './../../components/Graphics.vue'
 import Clients from './../../components/clients/Clients.vue'
+import EditClient from './../../components/clients/EditClient.vue'
 import NewClient from './../../components/clients/NewClient.vue'
 import Pits from './../../components/pits/Pits.vue'
 import NewPit from './../../components/pits/NewPit.vue'
@@ -15,5 +16,6 @@ export default [
   { path: '/nuevo_cliente', component: NewClient, name: 'new_client' },
   { path: '/pozos', component: Pits, name: 'pits' },
   { path: '/nuevo_pozo', component: NewPit, name: 'new_pit' },
-  { path: '/propiedades', component: Properties, name: 'properties' }
+  { path: '/propiedades', component: Properties, name: 'properties' },
+  { path: '/editar_cliente/:id', component: EditClient, name: 'edit_client' },
 ]
