@@ -28,6 +28,17 @@ Vue.component('vue-plotly', VuePlotly)
 
 Vue.config.productionTip = false
 
+
+Vue.http.interceptor.before = (request, next) => {
+  console.log(request);
+  router.app.updateLoader(true)
+  next((response) => {
+    router.app.updateLoader(false)
+    console.log(response)
+  })
+}
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

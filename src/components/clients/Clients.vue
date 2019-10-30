@@ -17,11 +17,12 @@
           </td>
         </template>
       </v-data-table>
-      <div class="" style="text-align: right; margin-top: 50px;">
-        <v-btn
-          @click="$router.push({name: 'new_client'})"
-          color="teal darken-1">Crear Cliente</v-btn>
-      </div>
+    </div>
+    <div class="" style="text-align: right; margin-top: 50px;">
+      <v-btn
+        @click="$router.push({name: 'new_client'})"
+        color="teal darken-1"
+        style="color: #fff">Crear Cliente</v-btn>
     </div>
   </article>
 </template>

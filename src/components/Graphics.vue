@@ -33,7 +33,8 @@
     <div  v-if="selected_properties.length > 0" class="" style="text-align: right; margin-top: 50px;">
       <v-btn
         @click="findPits(client_selected.id)"
-        color="teal darken-1">Graficar</v-btn>
+        color="teal darken-1"
+        style="color: #fff">Graficar</v-btn>
     </div>
     <v-layout row wrap v-if="charged">
       <v-flex xs6 alig-center justify-center v-for="(property, index) in selected_properties" style="padding: 15px">

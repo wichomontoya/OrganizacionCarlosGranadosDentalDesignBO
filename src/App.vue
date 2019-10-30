@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <app-login v-if="getLogin()"></app-login>
+  <div id="app" v-else>
     <v-app id="inspire">
       <v-navigation-drawer
         fixed
@@ -66,6 +67,7 @@
         </v-container>
       </v-content>
     </v-app>
+    <app-loader></app-loader>
   </div>
 </template>
 
