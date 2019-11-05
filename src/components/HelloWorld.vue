@@ -1,7 +1,7 @@
 <template>
   <article style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content:center">
     <section>
-      <img src="https://ippassets.s3-us-west-2.amazonaws.com/logo.png" alt="">
+      <img src="https://ocgdd.s3-us-west-2.amazonaws.com/Carlos-Granados-Logotipo.jpg" alt="">
     </section>
   </article>
 </template>

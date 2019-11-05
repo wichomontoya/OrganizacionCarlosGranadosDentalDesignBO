@@ -1,7 +1,7 @@
 <template>
   <article class="loader" v-if="getLoader()">
     <section class="loader__container">
-      <img src="https://ippassets.s3-us-west-2.amazonaws.com/logo.png" alt="">
+      <img src="https://ocgdd.s3-us-west-2.amazonaws.com/Carlos-Granados-Logotipo.jpg" alt="">
     </section>
   </article>
 </template>
@@ -26,7 +26,7 @@ export default {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.7);
+  background: rgba(255,255,255,0.7);
   top: 0;
   left: 0;
   right: 0;
@@ -40,7 +40,7 @@ export default {
   z-index: 999;
 }
 .loader__container{
-  width: 20%;
+  width: 40%;
 }
 .loader__container img{
   width: 70%;

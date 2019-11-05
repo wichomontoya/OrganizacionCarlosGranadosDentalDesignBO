@@ -52,9 +52,10 @@
           </template>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar color="teal darken-1" app absolute clipped-left style="color: white">
+      <v-toolbar color="deep-purple darken-4" app absolute clipped-left style="color: white">
         <v-toolbar-side-icon @click.native="drawer = !drawer" color="white"></v-toolbar-side-icon>
-        <span class="title ml-3 mr-5">IPP Backoffice</span></span>
+        <!-- <img src="https://ocgdd.s3-us-west-2.amazonaws.com/Carlos-Granados-Logotipo.jpg" alt=""> -->
+        <span class="title ml-3 mr-5">Organización Carlos Granados Dental Design</span></span>
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-content>
@@ -78,14 +79,14 @@ export default {
     return{
       drawer: null,
       items: [
-        { icon: 'swap_vert', text: 'Importador', route: 'importer' },
+        { icon: 'view_quilt', text: 'Sección', route: 'sections' },
         { divider: true },
-        { icon: 'bar_chart', text: 'Graficas', route: 'graphics' },
+        { icon: 'note', text: 'Artículos', route: 'articles' },
         { divider: true },
-        { icon: 'account_circle', text: 'Clientes', route: 'clients' },
-        { icon: 'whatshot', text: 'Pozos', route: 'pits' },
-        // { icon: 'format_list_numbered', text: 'Propiedades', route: 'properties' },
-        { divider: true }
+        // { icon: 'view_carousel', text: 'Slides', route: 'clients' },
+        // { divider: true },
+        // { icon: 'remove_from_queue', text: 'Sub menus', route: 'pits' },
+        // { divider: true }
       ]
     }
   },
