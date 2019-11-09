@@ -41,10 +41,14 @@ export default {
 }
 .loader__container{
   width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center,
 }
 .loader__container img{
   width: 70%;
   height: auto;
+  margin: 0 auto;
   -webkit-animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   -moz-animation: load_icon 1.5s infinite;
   -webkit-animation: load_icon 1.5s infinite;

@@ -15,10 +15,12 @@
       <v-text-field
         v-model="section.es.text"
         label="Texto español"
+        multi-line
       ></v-text-field>
       <v-text-field
         v-model="section.en.text"
         label="Texto ingles"
+        multi-line
       ></v-text-field>
       <label for=""><b>Tipo de video</b></label>
       <v-radio-group v-model="section.type">
@@ -35,7 +37,7 @@
       </v-radio-group>
       <v-text-field
         v-model="section.video"
-        :label="section.type == 'youtube' ? 'Id video de youtube' : 'Link del video'"
+        :label="section.video_type == 'youtube' ? 'Id video de youtube' : 'Link del video'"
       ></v-text-field>
       <v-btn
         @click="createSection()">Guardar</v-btn>
@@ -57,7 +59,7 @@ export default {
           title: '',
           text: ''
         },
-        type: 'youtube',
+        video_type: 'youtube',
         video: ''
       },
       client:{
@@ -94,7 +96,7 @@ export default {
                  }
               ],
               "video": this.section.video,
-              "type": this.section.type
+              "video_type": this.section.video_type
 
           }
           ).then(function(response){

@@ -45,7 +45,7 @@ export default {
       try {
         this.$http.get('article/',
         ).then(function(response){
-          this.articles = response.body.articles
+          this.articles = response.body
           console.log("Congrats");
           console.log(response);
         },function(response){

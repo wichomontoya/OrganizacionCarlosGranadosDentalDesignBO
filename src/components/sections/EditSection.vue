@@ -15,13 +15,15 @@
       <v-text-field
         v-model="section.es.text"
         label="Texto español"
+        multi-line
       ></v-text-field>
       <v-text-field
         v-model="section.en.text"
         label="Texto ingles"
+        multi-line
       ></v-text-field>
       <label for=""><b>Tipo de video</b></label>
-      <v-radio-group v-model="section.type">
+      <v-radio-group v-model="section.video_type">
         <v-radio
           key="youtube"
           :label="`Youtube`"
@@ -57,7 +59,7 @@ export default {
           title: '',
           text: ''
         },
-        type: 'youtube',
+        video_type: 'youtube',
         video: ''
       },
       charged:  false,
@@ -72,13 +74,13 @@ export default {
         this.section = {
           es:{
             title: temp_section.title.es,
-            text: ''
+            text: temp_section.text.es
           },
           en:{
             title: temp_section.title.en,
-            text: ''
+            text: temp_section.text.en
           },
-          type: 'youtube',
+          video_type: temp_section.video_type == null ? 'youtube' : temp_section.video_type,
           video: temp_section.video,
           id: temp_section.id
         },
@@ -112,7 +114,7 @@ export default {
              }
           ],
           "video": this.section.video,
-          "type": this.section.type
+          "video_type": this.section.video_type
         }
         ).then(function(response){
           console.log("Update");
