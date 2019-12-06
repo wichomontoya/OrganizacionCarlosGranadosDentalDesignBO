@@ -43,10 +43,10 @@ export default {
   methods:{
     findArticles(){
       try {
-        this.$http.get('article/',
+        this.$http.get('article/',{"language":'es'},
         ).then(function(response){
           this.articles = response.body
-          console.log("Congrats");
+          console.log("Congrats article");
           console.log(response);
         },function(response){
           console.log("Error");

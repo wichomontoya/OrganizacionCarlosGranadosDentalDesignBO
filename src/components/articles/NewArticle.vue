@@ -180,7 +180,7 @@ export default {
 }
 </script>
 <style media="css">
-  .data_card__image){
+  .data_card__image{
     width: 400px;
   }
 </style>
