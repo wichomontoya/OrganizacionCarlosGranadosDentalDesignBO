@@ -4,19 +4,26 @@
     <div
       style="margin: 20px 0;"
       v-if="articles.length > 0">
-      <v-data-table
-        :headers="headers"
-        :items="articles"
-        hide-actions
-        class="elevation-1">
-        <template slot="items" slot-scope="props">
-          <td
-            class="text-xs-center"
-            @click="$router.push({name: 'edit_article', params:{id: props.item.id}})">
-            {{ props.item.title.es}}
-          </td>
-        </template>
-      </v-data-table>
+
+      <v-container>
+        <v-data-table :headers="myHeaders" :items="mySections" hide-actions item-key="name" style="overflow-x:hidden !important;border:1.5px solid #d4cfed;border-radius:6px;" >
+
+          <template slot="items" slot-scope="props">
+            <tr @click="props.item.active=!props.item.active" style="background-color:lavender;border: 1px solid darkgray;cursor:pointer">
+              <td><div style="display:flex;justify-content:space-between;font-size: 15px;">
+                <b>•   {{ props.item.name }}</b>
+                <b>{{props.item.active?'▼':'▲'}}</b>
+                </div></td>
+            </tr>
+            <tr v-if="props.item.active"   style="padding:0px !important;cursor:zoom-in" v-for="(article,myId) in myArticles[props.item.name]" :key="myId">
+              <td @click="$router.push({name: 'edit_article', params:{id: article.id}})" style="text-align:center;width:100%;">{{ article.title }}</td>
+            </tr>
+            
+          </template>
+
+        </v-data-table>
+      </v-container>
+  
     </div>
     <div class="" style="text-align: right; margin-top: 50px;">
       <v-btn
@@ -32,9 +39,17 @@ export default {
   data(){
     return{
       articles: [],
-      headers: [
-        {text: 'Titulo', value: 'title'}
-      ]
+      myHeaders: [
+        {
+          text: 'Listado de secciones',
+          align: 'left',
+          value: 'name',
+          sortable:false,
+        }
+      ],
+      mySections:[],
+      myArticles:{},
+      
     }
   },
   mounted(){
@@ -42,12 +57,25 @@ export default {
   },
   methods:{
     findArticles(){
+
       try {
         this.$http.get('article/',{"language":'es'},
         ).then(function(response){
           this.articles = response.body
           console.log("Congrats article");
           console.log(response);
+          var tempArticles=response.body;
+          var self=this;
+          this.myArticles={};
+          this.mySections=[];
+          tempArticles.forEach(function(element, i) {
+                                          if(self.myArticles[element.section.title.es]==undefined){
+                                            self.myArticles[element.section.title.es]=[]
+                                            self.mySections.push({name:element.section.title.es,active:false})
+                                          }
+                                          self.myArticles[element.section.title.es].push({id:element.id,title: element.title.es })
+                                        });
+          console.log(this.mySections);
         },function(response){
           console.log("Error");
           console.log(response);
@@ -60,3 +88,8 @@ export default {
   }
 }
 </script>
+<style>
+  .table__overflow{
+    overflow-x: hidden !important;
+  }
+</style>

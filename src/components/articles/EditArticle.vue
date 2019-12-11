@@ -1,5 +1,6 @@
 <template>
   <article class="">
+    <!-- <v-btn style="left:-2px;top:-15px" @click="$router.push({name: 'articles'})">◄-</v-btn> -->
     <h3>Editar Articulo</h3>
     <v-flex xs12>
       <v-select
@@ -59,8 +60,8 @@
         :style="{backgroundImage: 'url('+ url +')'}"></div> -->
 
       <v-btn
-        @click="createArticle()">Editar</v-btn>
-      <v-btn @click="$router.push({name: 'sections'})">Cancelar</v-btn>
+        @click="updateArticle()">Editar</v-btn>
+      <v-btn @click="$router.push({name: 'articles'})">Cancelar</v-btn>
     </section>
   </article>
 </template>
@@ -124,10 +125,10 @@ export default {
         return false
       }
     },
-    createArticle(){
+    updateArticle(){
       if(this.validateArticle()){
         try {
-          this.$http.post('article/', {
+          this.$http.put('article/'+this.article.id, {
               "languages": [
                  {
                    "language": "es",
