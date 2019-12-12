@@ -62,7 +62,8 @@
               color="indigo"
               hide-details
         ></v-switch>
-        <slide-controller v-show="article.is_slider"  @save="addSlide" :slides="article.slides" ></slide-controller>
+        <slide-controller v-if="isLoaded" v-show="article.is_slider"  @save="addSlide" :slides="article.slides" ></slide-controller>
+        
       </v-flex>
 
 
@@ -79,6 +80,7 @@ import SlideController from './slides/SlideController.vue'
 export default {
   data(){
     return {
+      isLoaded:false,
       photo_name: 'No se han seleccionado archivos',
       url_change: false,
       url:'https://s3-us-west-2.amazonaws.com/karrottsportlife/default_image.svg',
@@ -210,6 +212,7 @@ export default {
     // },
   },
   mounted(){
+    var self=this;
      try {
       this.$http.get('article/' + this.$route.params.id,
       ).then(function(response){
@@ -229,14 +232,37 @@ export default {
             section_id: temp_article.section_id,
             id: temp_article.id,
             image:temp_article.image,
-            slides: temp_article.slides
+            slides: []
         },
+        temp_article.slides.forEach(function(element, i) {
+           let tempSlide={
+            id:element.id,
+            image: element.image,
+            video_type: "youtube",
+            video: element.video,
+            type: element.my_type,
+            languages: [
+                {
+                    language: "es",
+                    title: element.title.es,
+                    text: element.text.es
+                },
+                {
+                    language: "en",
+                    title: element.title.en,
+                    text: element.text.en
+                }
+            ]
+            }
+            self.article.slides.push(tempSlide)
+          });
         this.url=temp_article.image;
         this.photo_name="Imagen ..."+temp_article.image.substring(temp_article.image.length-9,temp_article.image.length)
         console.log("Congrats");
         console.log(response);
         this.charged = true;
         this.findSections();
+        this.isLoaded=true;
       },function(response){
         console.log("Error");
         console.log(response);

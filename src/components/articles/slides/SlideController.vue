@@ -17,7 +17,7 @@
         </v-data-table>
       </v-container>
       <p v-else>Este artículo no tiene slides</p>
-  
+      {{slides}}
     </div>
     <div class="" style="text-align: right; margin-top: 50px;">
       <v-btn
