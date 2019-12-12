@@ -12,7 +12,7 @@
             <tr @click="props.item.active=!props.item.active" style="background-color:lavender;border: 1px solid darkgray;cursor:pointer">
               <td><div style="display:flex;justify-content:space-between;font-size: 15px;">
                 <b>•   {{ props.item.name }}</b>
-                <b>{{props.item.active?'▼':'▲'}}</b>
+                <b>{{props.item.active?'▲':'▼'}}</b>
                 </div></td>
             </tr>
             <tr v-if="props.item.active"   style="padding:0px !important;cursor:zoom-in" v-for="(article,myId) in myArticles[props.item.name]" :key="myId">
@@ -41,7 +41,7 @@ export default {
       articles: [],
       myHeaders: [
         {
-          text: 'Listado de secciones',
+          text: 'Listado de artículos por secciones',
           align: 'left',
           value: 'name',
           sortable:false,

@@ -34,6 +34,7 @@
         v-model="article.position"
         label="Posición"
       ></v-text-field>
+    
       <label for=""><b>Imagen</b></label>
       <div class="trainers__form--photo_container">
         <label
@@ -52,19 +53,29 @@
       <v-flex xs12 style="margin: 25px 0; text-align: center;">
         <img :src="url" alt="" width="400px"/>
       </v-flex>
+
       <!-- <div
         class="data_card__image"
         :class = "{'without_url' : !url_change}"
         :style="{backgroundImage: 'url('+ url +')'}"></div> -->
-
+      <v-flex xs12 style="margin: 25px 0; margin-top:50px !important; text-align: center;">
+        <v-switch
+              v-model="article.is_slider"
+              label="El artículo tiene slides"
+              color="indigo"
+              hide-details
+        ></v-switch>
+        <slide-controller v-show="article.is_slider"  @save="addSlide" :slides="article.slides" ></slide-controller>
+      </v-flex>
       <v-btn
         @click="createArticle()">Crear</v-btn>
-      <v-btn @click="$router.push({name: 'sections'})">Cancelar</v-btn>
+      <v-btn @click="$router.push({name: 'articles'})">Cancelar</v-btn>
     </section>
   </article>
 </template>
 
 <script>
+import SlideController from './slides/SlideController.vue'
 export default {
   data(){
     return {
@@ -85,9 +96,13 @@ export default {
         image: null,
         position: null,
         is_slider: false,
-        section_id: null
+        section_id: null,
+        slides:[]
       }
     }
+  },
+  components:{
+    SlideController,
   },
   methods:{
     findSections(){
@@ -104,6 +119,15 @@ export default {
       } catch (e) {
         console.log("Error");
         console.log(e);
+      }
+    },
+    addSlide(value,pos){
+      
+      if(pos!=null){
+         this.article.slides.splice(pos,1);
+        this.article.slides.splice(pos,0,value)
+      }else{
+        this.article.slides.push(value);
       }
     },
     validateArticle(){
@@ -133,8 +157,9 @@ export default {
               ],
               "image": this.article.image,
               "position": this.article.position,
-              "section_id": this.section_selected.id
-
+              "section_id": this.section_selected.id,
+              "is_slider":this.article.is_slider,
+              "slides":this.article.slides
           }
           ).then(function(response){
             console.log("Update");

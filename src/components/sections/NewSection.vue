@@ -23,7 +23,7 @@
         multi-line
       ></v-text-field>
       <label for=""><b>Tipo de video</b></label>
-      <v-radio-group v-model="section.type">
+      <v-radio-group v-model="section.video_type">
         <v-radio
           key="youtube"
           :label="`Youtube`"
