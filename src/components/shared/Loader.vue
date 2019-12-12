@@ -1,7 +1,7 @@
 <template>
   <article class="loader" v-if="getLoader()">
     <section class="loader__container">
-      <img src="https://ocgdd.s3-us-west-2.amazonaws.com/Carlos-Granados-Logotipo.jpg" alt="">
+      <img src="https://ocgdd.s3-us-west-2.amazonaws.com/Carlos+Granados+Logotipo-02.svg" alt="">
     </section>
   </article>
 </template>

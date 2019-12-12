@@ -18,12 +18,12 @@
         </template>
       </v-data-table>
     </div>
-    <div class="" style="text-align: right; margin-top: 50px;">
+    <!-- <div class="" style="text-align: right; margin-top: 50px;">
       <v-btn
         @click="$router.push({name: 'new_section'})"
         color="deep-purple darken-4"
         style="color: #fff">Crear Sección</v-btn>
-    </div>
+    </div> -->
   </article>
 </template>
 
