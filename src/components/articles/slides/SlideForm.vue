@@ -160,12 +160,19 @@ export default {
     console.log(this.myActualSlide);
     if(Object.keys(this.myActualSlide).length>0){
       this.slide=this.myActualSlide;
-      
-      if(this.myActualSlide.image.length>0){
-        this.url=this.myActualSlide.image;
-        console.log(this.myActualSlide)
-        this.photo_name="slider_img."+this.myActualSlide.image.substring(11,14)
-        this.url_change=true;
+      if(this.myActualSlide.image.url==undefined){
+        if(this.myActualSlide.image.length>0){
+          this.url=this.myActualSlide.image;
+          console.log(this.myActualSlide)
+          this.photo_name="slider_img."+this.myActualSlide.image.substring(11,14)
+          this.url_change=true;
+        }
+      }else{
+         if(this.myActualSlide.image.url.length>0){
+          this.url=this.myActualSlide.image.url;
+          this.photo_name="slider_img."+this.myActualSlide.image.url.substring(11,14)
+          this.url_change=true;
+         }
       }
     }
   },
