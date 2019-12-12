@@ -2,8 +2,8 @@ const state = {
   language: '',
   loader: false,
   login: true,
-  user: "admin@admin.com",
-  password: "123456"
+  user: "admin@carlosgranadosdentaldesign.com",
+  password: "Adm1nOCGDD"
   // user: 'admin@carlosgranadosdentaldesign.com',
   // password: '4dm1nOcgdd'
 }
