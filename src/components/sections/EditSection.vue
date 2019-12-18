@@ -1,6 +1,6 @@
 <template>
   <article class="">
-    <h3>Editar Sección</h3>
+    <h3 style="margin-bottom: 20px;">Editar Sección {{section.es.title}}</h3>
     <section>
       <label for=""><b>Titulo</b></label>
       <v-text-field

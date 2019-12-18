@@ -4,74 +4,88 @@
       <section class="my_body_container"  @click.stop=" () => null">
          <h3 >FORMULARIO DE SLIDER</h3>
           <v-flex xs12 style="margin-top:30px">
-            <v-select
+            <!-- <v-select
                 :items="typesOfSlide"
                 v-model="slide.type"
                 label="Selecciona el tipo de slide"
-              ></v-select>
+              ></v-select> -->
           </v-flex>
           <section >
-            <label for=""><b>Título</b></label>
-            <div style="display:flex;flex-wrap:wrap;justify-content:space-around">
-              <v-flex xs5>
-                 <label for="">Español:</label>
-                <v-text-field
-                  v-model="slide.languages[0].title"
-                  label="Título español"
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs5>
-                <label for="">Inglés:</label>
-                <v-text-field
-                  v-model="slide.languages[1].title"
-                  label="Título inglés"
-                ></v-text-field>
-              </v-flex>
-            </div>
-         
-            <label for=""><b>Texto</b></label>
-            <div style="display:flex;flex-wrap:wrap;justify-content:space-evenly">
-              <v-flex xs5>
-               
-                <v-text-field
-                  v-model="slide.languages[0].text"
-                  label="Texto español"
-                  multi-line
-                  :rows="1"
-                ></v-text-field>
-                  </v-flex>
+            <v-flex xs12 style="margin-top:30px">
+              <label for=""><b>Título</b></label>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-around">
                 <v-flex xs5>
-                <v-text-field
-                  v-model="slide.languages[1].text"
-                  label="Texto inglés"
-                  multi-line
-                  :rows="1"
-                ></v-text-field>
-              </v-flex>
-            </div>
+                   <label for="">Español:</label>
+                  <v-text-field
+                    v-model="slide.languages[0].title"
+                    label="Título español"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs5>
+                  <label for="">Inglés:</label>
+                  <v-text-field
+                    v-model="slide.languages[1].title"
+                    label="Título inglés"
+                  ></v-text-field>
+                </v-flex>
+              </div>
+            </v-flex>
+
+            <v-flex xs12 style="margin-top:30px">
+              <label for=""><b>Texto</b></label>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-around">
+                <v-flex xs5>
+
+                  <v-text-field
+                    v-model="slide.languages[0].text"
+                    label="Texto español"
+                    multi-line
+                    :rows="10"
+                  ></v-text-field>
+                    </v-flex>
+                  <v-flex xs5>
+                  <v-text-field
+                    v-model="slide.languages[1].text"
+                    label="Texto inglés"
+                    multi-line
+                    :rows="10"
+                  ></v-text-field>
+                </v-flex>
+              </div>
+
+            </v-flex>
+            <v-flex xs12 style="margin: 25px 0; margin-top:50px !important; text-align: center;">
+              <v-switch
+                    v-model="has_video"
+                    label="Es un video"
+                    color="indigo"
+                    hide-details
+              ></v-switch>
+            </v-flex>
+
             <v-flex xs12 style="flex-wrap:wrap;display:flex;justify-content:space-evenly  ">
-            <v-flex xs6>
-            <label for=""><b>Imagen</b></label>
-            <div  style="margin-top:20px" class="trainers__form--photo_container">
-              <label
-                for="articlePhoto"
-                style="
-                width: 160px;
-                height: 34px;"
-                class="trainers__form--photo_button">Examinar</label>
-              <input
-                id="articlePhoto"
-                type="file"
-                :style="!url_change?'color:transparent':'color:black'"
-                @change="onFileChange"
-                name="logo">
-              <p v-if="!url_change" >{{ photo_name }}</p>
-            </div>
-            <v-flex xs12 style="margin: 25px 0; text-align: center;">
-              <img :src="url" alt="" width="150px"/>
-            </v-flex> 
+            <v-flex xs6 v-show="!has_video">
+              <label for=""><b>Imagen</b></label>
+              <div  style="margin-top:20px" class="trainers__form--photo_container">
+                <label
+                  for="articlePhoto"
+                  style="
+                  width: 160px;
+                  height: 34px;"
+                  class="trainers__form--photo_button">Examinar</label>
+                <input
+                  id="articlePhoto"
+                  type="file"
+                  :style="!url_change?'color:transparent':'color:black'"
+                  @change="onFileChange"
+                  name="logo">
+                <p v-if="!url_change" >{{ photo_name }}</p>
+              </div>
+              <v-flex xs12 style="margin: 25px 0; text-align: center;">
+                <img :src="url" alt="" width="150px"/>
+              </v-flex>
            </v-flex>
-           <v-flex xs5>
+           <v-flex xs6 v-show="has_video">
               <label for=""><b>Video</b></label>
               <v-radio-group v-model="slide.video_type">
                 <v-radio
@@ -90,10 +104,12 @@
                 :label="slide.video_type == 'youtube' ? 'Id video de youtube' : 'Link del video'"
               ></v-text-field>
            </v-flex>
-          </v-flex>
-            <v-btn
-              @click="createSlide()">Guardar</v-btn>
-            <v-btn @click="$emit('close')">Cancelar</v-btn>
+         </v-flex >
+         <div style="display: flex; align-items: center; justify-content: flex-end">
+           <v-btn
+            @click="createSlide()">Guardar</v-btn>
+           <v-btn @click="$emit('close')">Cancelar</v-btn>
+         </div>
           </section>
       </section>
     </article>
@@ -105,6 +121,7 @@
 export default {
   data(){
     return {
+      has_video: false,
       typesOfSlide:["Integrado en página","Modal Individual"],
       photo_name: 'No se han seleccionado archivos',
       url_change: false,
@@ -126,11 +143,18 @@ export default {
                     text: ""
                 }
             ],
-            
+
         },
     }
   },
   props: ['myActualSlide'],
+  // watch:{
+  //   has_video(){
+  //     if(!this.has_video){
+  //       this.slide.video = ''
+  //     }
+  //   }
+  // },
   methods:{
     createSlide(){
       console.log(this.slide)
@@ -176,7 +200,7 @@ export default {
       }
     }
   },
-  
+
 }
 </script>
 <style media="css">
@@ -206,7 +230,7 @@ export default {
     padding: 1vh 30px !important;
     max-height: fit-content !important;
     height: 86vh;
-    width: 86%;
+    width: 50%;
     overflow-y:scroll;
   }
 

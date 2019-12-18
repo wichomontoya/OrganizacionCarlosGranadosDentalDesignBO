@@ -30,11 +30,11 @@
         label="Texto ingles"
         multi-line
       ></v-text-field>
-      <v-text-field
+      <!-- <v-text-field
         v-model="article.position"
         label="Posición"
-      ></v-text-field>
-    
+      ></v-text-field> -->
+
       <label for=""><b>Imagen</b></label>
       <div class="trainers__form--photo_container">
         <label
@@ -122,7 +122,7 @@ export default {
       }
     },
     addSlide(value,pos){
-      
+
       if(pos!=null){
          this.article.slides.splice(pos,1);
         this.article.slides.splice(pos,0,value)

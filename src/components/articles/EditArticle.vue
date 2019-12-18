@@ -1,7 +1,7 @@
 <template>
   <article class="">
     <!-- <v-btn style="left:-2px;top:-15px" @click="$router.push({name: 'articles'})">◄-</v-btn> -->
-    <h3>Editar Articulo</h3>
+    <h3 style="margin-bottom: 30px;">Editar Articulo {{article.es.title}}</h3>
     <v-flex xs12>
       <v-select
           :items="sections"
@@ -31,10 +31,10 @@
         label="Texto ingles"
         multi-line
       ></v-text-field>
-      <v-text-field
+      <!-- <v-text-field
         v-model="article.position"
         label="Posición"
-      ></v-text-field>
+      ></v-text-field> -->
       <label for=""><b>Imagen</b></label>
       <div class="trainers__form--photo_container">
         <label
@@ -54,7 +54,6 @@
       <v-flex xs12 style="margin: 25px 0; text-align: center;">
         <img :src="url" alt="" width="400px"/>
       </v-flex>
-      
       <v-flex xs12 style="margin: 25px 0; margin-top:50px !important; text-align: center;">
         <v-switch
               v-model="article.is_slider"
@@ -63,11 +62,7 @@
               hide-details
         ></v-switch>
         <slide-controller v-if="isLoaded" v-show="article.is_slider"  @save="addSlide" :slides="article.slides" ></slide-controller>
-        
       </v-flex>
-
-
-
       <v-btn
         @click="updateArticle()">Editar</v-btn>
       <v-btn @click="$router.push({name: 'articles'})">Cancelar</v-btn>
@@ -121,7 +116,7 @@ export default {
                 return item;
               }
             });
-          
+
         },function(response){
           console.log("Error");
           console.log(response);
@@ -132,7 +127,7 @@ export default {
       }
     },
     addSlide(value,pos){
-      
+
       if(pos!=null){
          this.article.slides.splice(pos,1);
         this.article.slides.splice(pos,0,value)
@@ -272,7 +267,7 @@ export default {
       console.log(e);
     }
   },
-  
+
 }
 </script>
 <style media="css">
