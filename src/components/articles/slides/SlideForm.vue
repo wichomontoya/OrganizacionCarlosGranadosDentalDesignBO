@@ -105,10 +105,14 @@
               ></v-text-field>
            </v-flex>
          </v-flex >
-         <div style="display: flex; align-items: center; justify-content: flex-end">
-           <v-btn
-            @click="createSlide()">Guardar</v-btn>
-           <v-btn @click="$emit('close')">Cancelar</v-btn>
+         <div style="display: flex; align-items: center; justify-content: space-between">
+           <v-btn v-if="slide.id" @click="deleteSlide()" color="error" style="float: left">Eliminar</v-btn>
+           <div class="" v-else></div>
+           <div class="">
+             <v-btn
+              @click="createSlide()" color="success">Guardar</v-btn>
+             <v-btn @click="$emit('close')">Cancelar</v-btn>
+           </div>
          </div>
           </section>
       </section>
@@ -168,6 +172,24 @@ export default {
       this.url_change=true;
       this.url = URL.createObjectURL(files[0]);
       this.createImage(files[0])
+    },
+    deleteSlide(){
+      try {
+        this.$http.post('delete/',{
+          id: this.slide.id
+        }
+        ).then(function(response){
+          console.log("Congrats");
+          console.log(response);
+          this.$emit('delete', this.slide)
+        },function(response){
+          console.log("Error");
+          console.log(response);
+        })
+      } catch (e) {
+        console.log("Error");
+        console.log(e);
+      }
     },
     createImage (file, name_field) {
       var reader = new FileReader()

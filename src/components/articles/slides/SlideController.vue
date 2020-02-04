@@ -7,11 +7,11 @@
         <v-data-table :headers="myHeaders" :items="mySlides" hide-actions item-key="name" style="overflow-x:hidden !important;border:1.5px solid #d4cfed;border-radius:6px;" >
 
           <template slot="items" slot-scope="props">
-            
+
             <tr style="padding:0px !important;cursor:zoom-in" >
               <td @click="editMySlide(props.item,props.index)" style="text-align:center;width:100%;">{{ props.item.languages[0].title}}</td>
             </tr>
-            
+
           </template>
 
         </v-data-table>
@@ -25,7 +25,12 @@
         style="color: #fff">Crear Slide</v-btn>
     </div>
 
-    <slide-form v-if="isCreatingSlide" :myActualSlide="actualSlide" @close="isCreatingSlide=false;actualSlide={};actualSlideIndex=null" @save="addSlide"></slide-form>
+    <slide-form
+      v-if="isCreatingSlide"
+      :myActualSlide="actualSlide"
+      @close="isCreatingSlide=false;actualSlide={};actualSlideIndex=null"
+      @save="addSlide"
+      @delete="removeSlide"></slide-form>
   </article>
 </template>
 
@@ -52,11 +57,11 @@ export default {
   mounted(){
     console.log("PROBANDO ")
     console.log(this.slides)
-    this.mySlides=this.slides;  
+    this.mySlides=this.slides;
   },
   methods:{
     addSlide(slide){
-      
+
       this.$emit('save',slide,this.actualSlideIndex);
       this.isCreatingSlide=false;
       this.actualSlide={};
@@ -67,6 +72,14 @@ export default {
       this.actualSlide=slide;
       this.actualSlideIndex=pos;
       this.isCreatingSlide=true;
+    },
+    removeSlide(slide){
+      this.mySlides.splice(this.mySlides.indexOf(slide), 1)
+      console.log("current Slides");
+      console.log(this.mySlides);
+      this.isCreatingSlide=false;
+      this.actualSlide={};
+      this.actualSlideIndex=null
     }
   },
   components:{
